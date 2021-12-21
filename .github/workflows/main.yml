@@ -24,7 +24,8 @@ jobs:
     - id: auth
       uses: google-github-actions/auth@v0
       with:
-        credentials_json: '${{ secrets.gcp_credentials }}'
+        workload_identity_provider: 'projects/314711647255/locations/global/workloadIdentityPools/grownity-pool/providers/github-action'
+        service_account: 'grownity-function@grownity-335819.iam.gserviceaccount.com'
 
     - id: 'deploy'
       uses: 'google-github-actions/deploy-cloud-functions@v0'
