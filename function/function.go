@@ -1,24 +1,15 @@
 package function
 
 import (
-	"encoding/json"
-	"fmt"
-	"html"
+	git "github.com/grownity/grownity/github"
 	"net/http"
+
+	db "github.com/grownity/grownity/db"
 )
 
 // HelloHTTP is an HTTP Cloud Function with a request parameter.
 func HelloHTTP(w http.ResponseWriter, r *http.Request) {
-	var d struct {
-		Name string `json:"name"`
-	}
-	if err := json.NewDecoder(r.Body).Decode(&d); err != nil {
-		fmt.Fprint(w, "Hellos, World!")
-		return
-	}
-	if d.Name == "" {
-		fmt.Fprint(w, "Hellos, World!")
-		return
-	}
-	fmt.Fprintf(w, "Hellos, %s!", html.EscapeString(d.Name))
+	db.InitDB()
+	database := db.GetClient()
+	database.UpdateOrg(git.GetOrganization())
 }
