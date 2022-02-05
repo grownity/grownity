@@ -1,4 +1,4 @@
-module grownity-function/m
+module grownity.com/function/m
 
 go 1.16
 
