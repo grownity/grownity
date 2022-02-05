@@ -30,7 +30,7 @@ jobs:
       uses: 'google-github-actions/deploy-cloud-functions@v0'
       with:
         name: 'grownity'
-        runtime: 'go113'
+        runtime: 'go116'
         region: 'europe-west3'
         entry_point: 'HelloHTTP'
         source_dir: 'function'
