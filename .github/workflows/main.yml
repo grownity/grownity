@@ -36,3 +36,4 @@ jobs:
         source_dir: 'function'
         env_vars: FB_SERVICE_ACCOUNT=${{secrets.FB_SERVICE_ACCOUNT}}
         env_vars_file: 'config/configuration.yaml'
+        build_environment_variables: GOOGLE_BUILDABLE=./function/function.go
