@@ -31,6 +31,7 @@ jobs:
       with:
         name: 'grownity'
         runtime: 'go113'
+        region: 'europe-west3'
         entry_point: 'HelloHTTP'
         source_dir: 'function'
         env_vars: FB_SERVICE_ACCOUNT=${{secrets.FB_SERVICE_ACCOUNT}}
