@@ -25,14 +25,5 @@ jobs:
       uses: google-github-actions/auth@v0
       with:
         credentials_json: ${{secrets.GCP_CREDENTIALS}}
-
-    - id: 'deploy'
-      uses: 'google-github-actions/deploy-cloud-functions@v0'
-      with:
-        name: 'grownity'
-        runtime: 'go116'
-        region: 'europe-west3'
-        entry_point: 'HelloHTTP'
-        source_dir: 'worker'
-        env_vars_file: 'config/configuration.yaml'
-        build_environment_variables: GOOGLE_BUILDABLE=/workspace/worker/function.go
+    - id: 'deploy cli'
+      run: cd worker && gcloud functions deploy function --entry-point HelloHTTP --runtime go116 --trigger-http --allow-unauthenticated --region europe-west3
