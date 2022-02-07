@@ -25,5 +25,5 @@ jobs:
       uses: google-github-actions/auth@v0
       with:
         credentials_json: ${{secrets.GCP_CREDENTIALS}}
-    - id: 'deploy cli'
+    - id: 'deployCLI'
       run: cd worker && gcloud functions deploy function --entry-point HelloHTTP --runtime go116 --trigger-http --allow-unauthenticated --region europe-west3
