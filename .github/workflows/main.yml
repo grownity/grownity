@@ -27,4 +27,4 @@ jobs:
         credentials_json: ${{secrets.GCP_CREDENTIALS}}
 
     - id: 'deploy_cli'
-      run: cd worker; gcloud functions deploy  --entry-point HelloHTTP --runtime go116 --trigger-http --allow-unauthenticated --region=europe-west3 --set-env-vars DB_URL=${{secrets.DB_URL}},FB_SERVICE_ACCOUNT=${{secrets.FB_SERVICE_ACCOUNT}}
+      run: cd worker; gcloud functions deploy  --entry-point HelloHTTP --region europe-west3 --runtime go116 --trigger-http --allow-unauthenticated --set-env-vars DB_URL=${{secrets.DB_URL}},FB_SERVICE_ACCOUNT=${{secrets.FB_SERVICE_ACCOUNT}}
