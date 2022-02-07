@@ -33,6 +33,6 @@ jobs:
         runtime: 'go116'
         region: 'europe-west3'
         entry_point: 'HelloHTTP'
-        source_dir: 'worker'
+        source_dir: './worker'
         env_vars_file: 'config/configuration.yaml'
-        build_environment_variables: GOOGLE_BUILDABLE=./function.go
+        build_environment_variables: GOOGLE_BUILDABLE=./worker/function.go
