@@ -18,7 +18,7 @@ type FbInterface interface {
 func FirebaseClient() (*firebaseDb.Client, error) {
 	ctx := context.Background()
 	config := &firebase.Config{
-		DatabaseURL: os.Getenv("DB_URl"),
+		DatabaseURL: os.Getenv("DB_URL"),
 	}
 	json := []byte(os.Getenv("FB_SERVICE_ACCOUNT"))
 	opt := option.WithCredentialsJSON(json)
