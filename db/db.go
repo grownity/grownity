@@ -13,7 +13,7 @@ type Database struct {
 var client Database
 
 func InitDB() {
-	FirebaseClient()
+	FirebaseClient("", "")
 	return
 }
 
