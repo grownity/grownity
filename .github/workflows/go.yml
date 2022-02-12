@@ -10,6 +10,9 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    env: 
+      FB_SERVICE_ACCOUNT: ${{secrets.TEST_FB_SERVICE_ACCOUNT}}
+      DB_URL: ${{secrets.TEST_DB_URL}}
     steps:
     - uses: actions/checkout@v2
 
@@ -22,4 +25,4 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: FB_SERVICE_ACCOUNT=${{secrets.TEST_FB_SERVICE_ACCOUNT}} DB_URL=${{secrets.TEST_DB_URL}} go test -v ./...  
+      run: go test -v ./...  
