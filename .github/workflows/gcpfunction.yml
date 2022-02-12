@@ -33,4 +33,5 @@ jobs:
         runtime: 'go116'
         region: 'europe-west3'
         entry_point: 'GrownityOn'
-        env_vars_file: 'config/configuration.yaml'
+        env_vars: FB_SERVICE_ACCOUNT=${{secrets.FB_SERVICE_ACCOUNT}},DB_URL=${{secrets.DB_URL}}
+        build_environment_variables: GOOGLE_BUILDABLE=.
