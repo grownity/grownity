@@ -7,6 +7,7 @@ require github.com/google/go-github/v41 v41.0.1-0.20211208172243-ff33a554ef2c
 require (
 	cloud.google.com/go/firestore v1.6.1 // indirect
 	cloud.google.com/go/storage v1.20.0 // indirect
+	firebase.google.com/go v3.13.0+incompatible // indirect
 	firebase.google.com/go/v4 v4.7.1
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	golang.org/x/crypto v0.0.0-20220210151621-f4118a5b28e2 // indirect

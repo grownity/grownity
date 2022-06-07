@@ -2,8 +2,10 @@ package db
 
 import (
 	"context"
+	"encoding/json"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/google/go-github/v41/github"
 
@@ -16,6 +18,27 @@ type FbInterface interface {
 	UpdateOrg(organization github.Organization) error
 }
 
+var fb_config_keys []string = []string{
+	"project_id",
+	"private_key_id",
+	"private_key",
+	"client_email",
+	"client_id",
+	"client_x509_cert_url",
+}
+
+func getFBConfig() map[string]string {
+	fb := make(map[string]string)
+	for _, key := range fb_config_keys {
+		fb[key] = os.Getenv("FB_" + strings.ToUpper(key))
+	}
+	fb["type"] = "service_account"
+	fb["auth_uri"] = "https://accounts.google.com/o/oauth2/auth"
+	fb["token_uri"] = "https://oauth2.googleapis.com/token"
+	fb["auth_provider_x509_cert_url"] = "https://www.googleapis.com/oauth2/v1/certs"
+	return fb
+}
+
 func FirebaseClient(url string, account string) (*firebaseDb.Client, error) {
 	ctx := context.Background()
 	databaseUrl := url
@@ -24,7 +47,7 @@ func FirebaseClient(url string, account string) (*firebaseDb.Client, error) {
 		databaseUrl = os.Getenv("DB_URL")
 	}
 	if account == "" {
-		json_acc = []byte(os.Getenv("FB_SERVICE_ACCOUNT"))
+		json_acc, _ = json.Marshal(getFBConfig())
 	} else {
 		json_acc = []byte(account)
 	}
