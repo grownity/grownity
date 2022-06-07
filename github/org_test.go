@@ -10,7 +10,7 @@ func TestGetOrg(t *testing.T) {
 	GitHubInit()
 	orgName := "kiali"
 	org := GetOrganization(orgName)
-	if org != nil {
+	if org == nil {
 		t.Fatalf(`Error getting organization.`)
 	}
 
