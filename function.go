@@ -11,7 +11,7 @@ import (
 
 // HelloHTTP is an HTTP Cloud Function with a request parameter.
 func GrownityOn(w http.ResponseWriter, r *http.Request) {
-	c, err := config.LoadFromFile("configuration.yaml")
+	c, err := config.LoadFromFile("./configuration.yaml")
 	if err != nil {
 		fmt.Fprint(w, err.Error())
 	}
