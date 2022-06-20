@@ -5,31 +5,14 @@ import (
 	"net/http"
 	"os"
 
-	config "github.com/grownity/grownity/config"
-	db "github.com/grownity/grownity/db"
-	git "github.com/grownity/grownity/github"
+	"os/exec"
 )
 
 // HelloHTTP is an HTTP Cloud Function with a request parameter.
 func GrownityOn(w http.ResponseWriter, r *http.Request) {
-	wd, err := os.Getwd()
-	if err != nil {
-		fmt.Fprint(w, err.Error())
-	}
-	if wd[len(wd)-1:] != "/" {
-		wd += "/"
-	}
-	c, err := config.LoadFromFile(wd + "configuration.yaml")
-	if err != nil {
-		fmt.Fprint(w, err.Error())
-	}
-	config.Set(c)
+	wd, _ := os.Getwd()
+	fmt.Fprintf(w, "$> pwd\n%s\n\n", wd)
 
-	err = db.InitDB()
-	if err != nil {
-		fmt.Fprint(w, err.Error())
-	}
-	database := db.GetClient()
-	database.UpdateOrg(git.GetOrganization("kiali"))
-	fmt.Fprint(w, "Hello, World!")
+	bytes, _ := exec.Command("ls", "-l").CombinedOutput()
+	fmt.Fprintf(w, "$> ls -l\n%s\n\n", bytes)
 }
