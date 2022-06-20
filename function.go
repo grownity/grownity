@@ -14,5 +14,5 @@ func GrownityOn(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "$> pwd\n%s\n\n", wd)
 
 	bytes, _ := exec.Command("ls", "-l").CombinedOutput()
-	fmt.Fprintf(w, "$> ls -l\n%s\n\n", bytes)
+	fmt.Fprintf(w, "$> ls -lR\n%s\n\n", bytes)
 }
