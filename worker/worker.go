@@ -6,8 +6,8 @@ import (
 	"github.com/grownity/grownity/config"
 )
 
-func Worker() string {
-	err := config.Init("")
+func Worker(conf string) string {
+	err := config.Init(conf)
 	if err != nil {
 		fmt.Printf("Error: %s", err.Error())
 	}

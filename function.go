@@ -9,6 +9,6 @@ import (
 
 // HelloHTTP is an HTTP Cloud Function with a request parameter.
 func GrownityOn(w http.ResponseWriter, r *http.Request) {
-	result := worker.Worker()
+	result := worker.Worker("/workspace/serverless_function_source_code/configuration.yaml")
 	fmt.Fprintf(w, "\n%s\n\n", result)
 }
