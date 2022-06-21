@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"sync"
 
 	yaml "gopkg.in/yaml.v2"
@@ -25,6 +26,23 @@ type GitHub struct {
 // Global configuration for the application.
 var configuration Config
 var rwMutex sync.RWMutex
+
+func Init(config string) (err error) {
+	file := config
+	pwd, err := os.Getwd()
+	if err != nil {
+		return
+	}
+	if file == "" {
+		file = pwd + "/configuration.yaml"
+	}
+	c, err := LoadFromFile(file)
+	if err != nil {
+		return
+	}
+	Set(c)
+	return
+}
 
 func Get() (conf *Config) {
 	rwMutex.RLock()

@@ -1,5 +1,0 @@
-db:
-  endpoint: ""
-  FB_account: ""
-github:
-  organization: "kiali"
