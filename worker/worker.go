@@ -7,7 +7,10 @@ import (
 )
 
 func Worker() string {
-	config.Init("")
+	err := config.Init("")
+	if err != nil {
+		fmt.Printf("Error: %s", err.Error())
+	}
 	configuration := config.Get()
 	fmt.Printf(configuration.GitHub.Organization)
 	fmt.Printf("I am the worker")
