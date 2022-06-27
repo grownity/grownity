@@ -14,9 +14,19 @@ type Config struct {
 	GitHub GitHub `yaml:"github"`
 }
 
+type FirebaseCredentials struct {
+	ProjectID     string `yaml:"project_id"`
+	PrivateKeyID  string `yaml:"private_key_id"`
+	PrivateKey    string `yaml:"private_key"`
+	ClientEmail   string `yaml:"client_email"`
+	ClientID      string `yaml:"client_id"`
+	ClientCertURL string `yaml:"client_x509_cert_url"`
+}
+
 type DB struct {
-	Endpoint   string `yaml:"endpoint"`
-	FB_account string `yaml:"FB_account"`
+	Endpoint            string              `yaml:"endpoint"`
+	Provider            string              `yaml:"provider"`
+	FirebaseCredentials FirebaseCredentials `yaml:"firebase_credentials,omitempty"`
 }
 
 type GitHub struct {

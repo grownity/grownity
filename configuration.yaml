@@ -1,4 +1,6 @@
 db:
-  endpoint: ""
+  endpoint: "https://grownity-335822-default-rtdb.europe-west1.firebasedatabase.app/"
+  # Supported providers: Firebase
+  provider: "Firebase"
 github:
   organization: "kiali"

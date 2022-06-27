@@ -1,32 +1,35 @@
 package db
 
 import (
-	config "github.com/grownity/grownity/config"
+	"fmt"
 
-	firebaseDb "firebase.google.com/go/v4/db"
-	"github.com/google/go-github/v41/github"
+	firebase "firebase.google.com/go"
+	config "github.com/grownity/grownity/config"
+	fb "github.com/grownity/grownity/db/firebase"
 )
 
+type ClientInterface interface {
+	FirebaseInterface
+}
+
 type Database struct {
-	FbInterface
-	fbClient *firebaseDb.Client
+	ClientInterface
+	fbApp *firebase.App
 }
 
 var client Database
 
 func InitDB() (err error) {
 	c := config.Get()
-	cl, err := FirebaseClient(c.DB.Endpoint, c.DB.FB_account)
-	if err != nil {
-		return err
+	switch c.DB.Provider {
+	case "Firebase":
+		client.fbApp, err = fb.FirebaseClient()
+	default:
+		return fmt.Errorf("Database provider %s not supported", c.DB.Provider)
 	}
-	client.fbClient = cl
-	return nil
+	return
 }
 
 func GetClient() *Database {
 	return &client
-}
-func (client *Database) UpdateOrganization(organization *github.Organization) error {
-	return client.UpdateOrg(organization)
 }
