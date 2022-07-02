@@ -1,5 +1,6 @@
 db:
-  endpoint: "<ENDPOINT>"
+  # Endpoint to the database
+  endpoint: ""
   # Supported providers: Firebase
   provider: "Firebase"
   firebase_credentials:
