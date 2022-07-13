@@ -3,7 +3,6 @@ package firebase
 import (
 	"context"
 	"encoding/json"
-	"log"
 	"os"
 
 	conf "github.com/grownity/grownity/config"
@@ -39,14 +38,10 @@ func getFBConfig() map[string]string {
 	return fb
 }
 
-func FirebaseClient() (*firebase.App, error) {
+func FirebaseClient() (app *firebase.App, err error) {
 	c := conf.Get()
 	ctx := context.Background()
 	var opt option.ClientOption
-	if !c.GCPFunction {
-		json_acc, _ := json.Marshal(getFBConfig())
-		opt = option.WithCredentialsJSON(json_acc)
-	}
 	databaseURL := c.DB.Endpoint
 	if databaseURL == "" {
 		databaseURL = os.Getenv("DB_URL")
@@ -54,11 +49,12 @@ func FirebaseClient() (*firebase.App, error) {
 	config := &firebase.Config{
 		DatabaseURL: databaseURL,
 	}
-	app, err := firebase.NewApp(ctx, config, opt)
-	if err != nil {
-		log.Fatal(err)
-		return nil, err
+	if !c.GCPFunction {
+		json_acc, _ := json.Marshal(getFBConfig())
+		opt = option.WithCredentialsJSON(json_acc)
+		app, err = firebase.NewApp(ctx, config, opt)
+	} else {
+		app, err = firebase.NewApp(ctx, config)
 	}
-
-	return app, nil
+	return
 }
