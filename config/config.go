@@ -10,8 +10,9 @@ import (
 )
 
 type Config struct {
-	DB     DB     `yaml:"db"`
-	GitHub GitHub `yaml:"github"`
+	DB          DB     `yaml:"db"`
+	GitHub      GitHub `yaml:"github"`
+	GCPFunction bool   `yaml:"gcp_function"`
 }
 
 type FirebaseCredentials struct {
@@ -49,6 +50,9 @@ func Init(config string) (err error) {
 	c, err := LoadFromFile(file)
 	if err != nil {
 		return
+	}
+	if os.Getenv("GCP_FUNCTION") == "true" {
+		c.GCPFunction = true
 	}
 	Set(c)
 	return

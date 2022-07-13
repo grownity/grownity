@@ -12,3 +12,4 @@ db:
     client_x509_cert_url: "<CLIENT_X509_CER>"
 github:
   organization: "kiali"
+gcp_function: false
